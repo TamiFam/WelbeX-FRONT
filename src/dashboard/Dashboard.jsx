@@ -61,23 +61,32 @@ const Dashboard = () => {
   const handleDeletePost = async (postId) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:3000/api/posts/${postId}`, {
+      const response = await axios.delete(`https://welbex-back.onrender.com/api/posts/${postId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-
-      // Анимация удаления
-      setPosts((prevPosts) =>
-        prevPosts.filter((post) => post.id !== postId)
-      );
-
-      // Swal.fire('Успех!', 'Пост успешно удален.', 'success');
+  
+      // Проверяем статус ответа
+      if (response.status === 200 || response.status === 204) {
+        // Удаляем пост из локального состояния только после успешного ответа от сервера
+        setPosts((prevPosts) => prevPosts.filter((post) => post.id !== postId));
+        Swal.fire('Успех!', 'Пост успешно удален.', 'success');
+      } else {
+        // Если статус не 200 или 204, показываем ошибку
+        Swal.fire('Ошибка!', 'Не удалось удалить пост.', 'error');
+      }
     } catch (error) {
       console.error('Ошибка при удалении поста:', error);
-      Swal.fire('Ошибка!', 'Не удалось удалить пост.', 'error');
+  
+      // Обрабатываем ошибку 403 (Forbidden)
+      if (error.response && error.response.status === 403) {
+        Swal.fire('Ошибка!', 'У вас нет прав на удаление этого поста.', 'error');
+      } else {
+        Swal.fire('Ошибка!', 'Не удалось удалить пост.', 'error');
+      }
     }
-  };
+  }
 
   const handleAddComment = async (postId, text) => {
     try {
