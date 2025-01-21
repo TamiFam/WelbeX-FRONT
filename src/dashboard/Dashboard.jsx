@@ -24,7 +24,7 @@ const Dashboard = () => {
   const fetchPosts = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('https://welbex-back.onrender.com/api/posts', {
+      const response = await axios.get('http://localhost:3000/api/posts', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -44,7 +44,7 @@ const Dashboard = () => {
   const handleCreatePost = async (formData) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.post('https://welbex-back.onrender.com/api/posts', formData, {
+      await axios.post('http://localhost:3000/api/posts', formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'multipart/form-data',
@@ -61,7 +61,7 @@ const Dashboard = () => {
   const handleDeletePost = async (postId) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`https://welbex-back.onrender.com/api/posts/${postId}`, {
+      await axios.delete(`http://localhost:3000/api/posts/${postId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -83,7 +83,7 @@ const Dashboard = () => {
     try {
       const token = localStorage.getItem('token');
       const response = await axios.post(
-        `https://welbex-back.onrender.com/api/posts/${postId}/comments`,
+        `http://localhost:3000/api/posts/${postId}/comments`,
         { text },
         {
           headers: {
@@ -119,7 +119,7 @@ const Dashboard = () => {
     try {
       const token = localStorage.getItem('token');
       const response = await axios.put(
-        `https://welbex-back.onrender.com/api/posts/${postId}`,
+        `http://localhost:3000/api/posts/${postId}`,
         {
           title: editingPost.title,
           content: editingPost.content,
@@ -213,14 +213,14 @@ const PostItem = ({ post, selectedPostId, setSelectedPostId, handleDeletePost, h
         <p className="text-gray-700 mb-6">{post.content}</p>
         {post.image && (
           <img
-            src={`https://welbex-back.onrender.com/${post.image}`}
+            src={`http://localhost:3000/${post.image}`}
             alt="Пост"
             className="mt-2 rounded-xl w-full h-72 object-cover shadow-md"
           />
         )}
         {post.video && (
           <video controls className="mt-2 rounded-xl w-full shadow-md">
-            <source src={`https://welbex-back.onrender.com/${post.video}`} type="video/mp4" />
+            <source src={`http://localhost:3000/${post.video}`} type="video/mp4" />
             Ваш браузер не поддерживает видео.
           </video>
         )}

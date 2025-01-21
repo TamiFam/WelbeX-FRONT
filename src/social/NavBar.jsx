@@ -28,7 +28,7 @@ const NavBar = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .post('https://welbex-back.onrender.com/logout', {
+          .post('http://localhost:3000/logout', {
             token: token,
           })
           .then(() => {
