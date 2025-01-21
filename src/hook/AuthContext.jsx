@@ -7,7 +7,7 @@
 
 //   const login = async (email, password) => {
 //     try {
-//       const response = await axios.post('http://localhost:3000/api/login', {
+//       const response = await axios.post('https://welbex-back.onrender.com/api/login', {
 //         method: 'POST',
 //         headers: {
 //           'Content-Type': 'application/json',
@@ -34,7 +34,7 @@
 
 //   const SignUp = async (email, password) => {
 //     try {
-//       const response = await axios.post('http://localhost:3000/api/signup', {
+//       const response = await axios.post('https://welbex-back.onrender.com/api/signup', {
 //         method: 'POST',
 //         headers: {
 //           'Content-Type': 'application/json',
