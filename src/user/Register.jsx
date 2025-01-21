@@ -16,7 +16,7 @@ const Register = () => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post('http://localhost:3000/new-user', {
+      const response = await axios.post('https://welbex-back.onrender.com/new-user', {
         name: data.name,
         email: data.email,
         password: data.password,
